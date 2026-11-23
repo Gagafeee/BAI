@@ -1,1 +1,4 @@
 /.idea/
+
+# User-specific database config.
+/config.php

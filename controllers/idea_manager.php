@@ -1,9 +1,8 @@
 <?php
-
+require_once __DIR__ . "/../libs/db.php";
 function addIdea(array $idea): void
 {
     try {
-
         $pdo = getPDO();
 
         $query = $pdo->prepare("INSERT INTO ideas (pseudo, title, description) VALUES (:pseudo, :title, :description);");
