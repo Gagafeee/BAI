@@ -20,7 +20,7 @@
             <input type="hidden" name="">
             </div>
             <div class="idea">
-            <input type="text" maxlength="100" placeholder="Titre de votre idee..." name="titre" id="titre">
+            <input type="text" maxlength="100" placeholder="Titre de votre idee..." name="title" id="titre">
             <textarea type="text" maxlength="1000" placeholder="Contenu de votre idee..." name="content" id="content"></textarea>
             </div>
             <div>
