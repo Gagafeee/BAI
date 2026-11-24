@@ -6,17 +6,17 @@ require_once __DIR__ . '/../libs/response.php';
 $data = [];
 
 # Idea title
-$idea_title = $_POST["title"];
+$idea_title = $_POST["title"] ?? null;
 # TODO: Add validation
 $data["title"] = $idea_title;
 
 # Idea content
-$idea_content = $_POST["content"];
+$idea_content = $_POST["content"] ?? null;
 # TODO: Add validation
 $data["description"] = $idea_content;
 
 # Author pseudo
-$author_pseudo = $_POST["pseudo"];
+$author_pseudo = $_POST["pseudo"] ?? null;
 # TODO: Add validation
 $data["pseudo"] = $author_pseudo;
 
