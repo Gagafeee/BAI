@@ -30,7 +30,13 @@
     </div>
 
     <div>
-
+        <form >
+            <label>Trié par ...</label>
+             <select id="trie" name="trie" >
+                                <option >Alphabétique</option>
+                                <option >Plus récent</option>
+                                <option >Plus voté</option>
+                            </select>
     </div>
 </body>
 
