@@ -1,0 +1,16 @@
+### Create new idea
+
+POST localhost:8080/actions/send_create_idea.php
+Content-Type: application/x-www-form-urlencoded
+
+title = Mysuper idea &
+content = content &
+pseudo = I'm the author
+
+
+### Send vote for an idea
+
+POST localhost:8080/actions/send_add_vote.php
+Content-Type: application/x-www-form-urlencoded
+
+id = 5
