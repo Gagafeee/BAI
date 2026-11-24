@@ -26,9 +26,14 @@ body div form .idea #content{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 70px;
+    padding-top: 32px;
 }
 
 .card {
     overflow: hidden;
     border-radius: 10px;
+}
+
+.idea{
+    background-color: gray;
 }
