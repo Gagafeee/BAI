@@ -11,7 +11,7 @@ function redirect(string $location): void
  */
 function redirect_successful(string $location, string $message = ''): void
 {
-    $path = $location . "?status=200" . ($message !== null ? "&message=" . rawurlencode($message) : "");
+    $path = $location . "?status=200" . ($message !== '' ? "&message=" . rawurlencode($message) : "");
     header('Location: ' . $path);
 }
 
@@ -23,7 +23,7 @@ function redirect_successful(string $location, string $message = ''): void
  */
 function redirect_error(string $location, int $error_code = 500, string $error = ''): void
 {
-    $path = $location . "?status=" . rawurlencode($error_code) . ($error !== null ? "&error=" . rawurlencode($error) : "");
+    $path = $location . "?status=" . rawurlencode($error_code) . ($error !== '' ? "&error=" . rawurlencode($error) : "");
     header('Location: ' . $path);
 }
 

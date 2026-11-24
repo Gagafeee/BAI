@@ -128,7 +128,15 @@ Le prompt :
     <td>L'IA indique d'utiliser "idéalement camelCase homogène à la PSR-1/12". Après recherche le document <a href="https://www.php-fig.org/psr/psr-12/#21-basic-coding-standard">PSR 12 section 2.1</a> recommande le PascalCase.</td>
     <td>Accepté</td>
     <td>Je vais continuer cependant d'utiliser le snake case, car il est déjà utilisé dans le projet. Le changement de norme devrait constituer un refactor global.</td>
-    <td></td>
+    <td>3a2dd9bc</td>
+</tr>
+<tr>
+    <td>11</td>
+    <td>Mauvaises conditions dans les fonctions de réponses.</td>
+    <td>L'IA indique que les check message !== null et error !== null dans request.php sont inutiles car les variables ne sont pas nullables, L'IA propose de les remplacer par !== ''. Cela ne corrige aucun bug puisque le message vide était encodé en HTML et ne revoyait rien.</td>
+    <td>Accepté</td>
+    <td>Je corrige le bug pour assurer la cohérence du programme.</td>
+    <td>3a2dd9bc</td>
 </tr>
 
 </table>
