@@ -215,8 +215,20 @@ Le prompt :
     <td>« La base de donnée <b>à</b> renvoyé une erreur » Le seum de toujours faire des fautes aussi bêtes...</td>
     <td>Accepté</td>
     <td></td>
+    <td>bab14428</td>
+</tr>
+<tr>
+    <td>21</td>
+    <td>respond_success(message ?string) → json_encode(['message' => null]) renvoie {"message":null}</td>
+    <td>Comportement volontaire puisque la fonction s'appelle respond_success.</td>
+    <td>Refusé</td>
+    <td></td>
     <td></td>
 </tr>
-
 </table>
+
+Je refais des tests par moi-même : 
+- Peut-on toujours ajouter une nouvelle idée.
+- Peut-on toujours voter pour une idée.
+- Les cas d'erreurs ont été testés au moment d'appliquer la correction.
 
