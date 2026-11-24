@@ -77,7 +77,15 @@ Le prompt :
     <td>La justification est correcte et cela provient d'un problème d'architecture de ma part.</td>
     <td>Accepté</td>
     <td>Cela permet effectivement de rendre plus robuste l'action.</td>
-    <td>aeb64ff8</td>
+    <td>b2d30a78</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Aucun Content-Type dans les réponses - fonctionnel mais critique</td>
+    <td>Je pense que celà n'est pas nécéssaire pour une application de cette taille parce que cela pourrait provoquer des erreurs en fonction des méthodes d'envois des requêtes, mais je l'implémente quand même.</td>
+    <td>Accepté</td>
+    <td>Cela permet effectivement de rendre plus robuste l'action.</td>
+    <td>b2d30a78</td>
 </tr>
 </table>
 
