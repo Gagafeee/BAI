@@ -27,6 +27,7 @@ body div form .idea #content{
     grid-template-columns: repeat(3, 1fr);
     gap: 70px;
     padding-top: 32px;
+    background-color: beige;
 }
 
 .card {
