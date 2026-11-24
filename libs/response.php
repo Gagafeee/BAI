@@ -43,5 +43,6 @@ function respond_error(?int $status = 500, ?string $message = "Une erreur est su
 {
     http_response_code($status);
     echo json_encode(['message' => $message]);
+    die();
 }
 

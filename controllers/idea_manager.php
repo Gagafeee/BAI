@@ -14,6 +14,8 @@ function addIdea(array $idea): void
 
 function add_approve_vote(int $idea_id): void
 {
+    if (doesIdeaExist($idea_id) === false) throw new Exception("Impossible d'ajouter votre vote : Cette idée n'existe pas.");
+
     try {
         $pdo = getPDO();
 
@@ -22,4 +24,22 @@ function add_approve_vote(int $idea_id): void
     } catch (PDOException $error) {
         throw new Exception("Impossible d'ajouter votre vote : La base de donnée à renvoyé une erreur.");
     }
+}
+
+function getIdea(int $id)
+{
+    try {
+        $pdo = getPDO();
+
+        $query = $pdo->prepare("SELECT * FROM ideas WHERE id = :id;");
+        $query->execute([":id" => $id]);
+        return $query->fetch();
+    } catch (PDOException $error) {
+        throw new Exception("Impossible d'ajouter votre idée : La base de donnée à renvoyé une erreur.");
+    }
+}
+
+function doesIdeaExist(int $id): bool
+{
+    return gettype(getIdea($id)) == "array";
 }
