@@ -37,3 +37,10 @@ body div form .idea #content{
 .idea{
     background-color: gray;
 }
+
+.idea-voting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}

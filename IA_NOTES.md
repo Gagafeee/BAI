@@ -185,7 +185,7 @@ Le prompt :
 </tr>
 <tr>
     <td>17</td>
-    <td>S'assurer que config.php est hors de la racine du projet pour éviter un accès non-authorisé.</td>
+    <td>S'assurer que config.php est hors de la racine du projet pour éviter un accès non autorisé.</td>
     <td>Après check à https://localhost/config.php, la page renvois bien une page mais avec un contenu vide car toutes les variables sont en php. C'est tout de même une vulnérabilité à surveiller.</td>
     <td>Refusé</td>
     <td>Ce n'est pas une réelle faille pour le moment mais je note la remarque pour le futur.</td>
@@ -227,8 +227,263 @@ Le prompt :
 </tr>
 </table>
 
-Je refais des tests par moi-même : 
+Je refais des tests par moi-même :
+
 - Peut-on toujours ajouter une nouvelle idée.
 - Peut-on toujours voter pour une idée.
 - Les cas d'erreurs ont été testés au moment d'appliquer la correction.
+
+## User story 10 - Dynamisation du système de vote - Full IA
+
+> Gabriel - 24/11/2026 15h
+
+Le système pour ajouter un vote sur une idée existe et est fonctionnel. Je vais utiliser `Junie Lite + reflexion` avec `AIR` + les intégrations de l'IDE pour implémenter le système frontend.
+
+Prompt :
+> Voici notre mini-projet de boite à idée, c'est un site en pure HTML, CSS, PHP, JS dans lequel on peut ajouter librement des nouvelles idées et voter pour celles que l'on préfère.
+> Dans le dossier `actions` tu trouveras l'action `send_add_vote` pour ajouter un nouveau vote sur une idée existante via une requête POST.
+> Tu peux retrouver un exemple de requête dans test_requests.http
+> Les cartes sont généré via le template dans `components/idea_card_template.php`
+>
+> Je te demande d'implémenter le frontend de cette fonctionnalité de vote en pure JS avec une logique AJAX.
+> - Commence par ajouter l'affichage du nombre de votes sur chaque carte (n'utilise que vote_approve).
+> - Ajoute un bouton "+1" sur chaque carte qui envois une nouvelle requête vers l'endpoint avec l'id de la carte en question.
+> - Implémente une fonction d'envois de requête générique dans un fichier `action-manager`
+> - Fait attention de bien gérer les erreurs, valeurs de retours, erreurs de réseaux etc. Lis le fichier de response dans `libs/response` pour adapter la fonction au backend.
+> - Je te demanderai plus tard d'ajouter un système de notification pour afficher les résultats, fait attention à bien séparer le traitement de la réponse pour que je puisse facilement changer
+>   ultérieurement l'affichage des résultats. Met seulement un message / erreur dans la console pour le moment.
+> - Enfin, ajoute la mise à jour dynamique de l'affichage en incrémentant le compteur de vote de la carte. Fait attention de ne le faire que si la requête a bien abouti.
+>
+> 
+> - Place tous les fichiers js que tu pourras créer dans un nouveau dossier `scripts`.
+> - N'utilise pas de librairies externes.
+>
+> Produit ensuite un petit résumé des différents élements que tu as ajouté avec les différents choix que tu as fait.
+
+Le modèle a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les donnée sensibles via un fichier `.aiignore` :
+
+```aiignore
+/config.php # Donnés de connexions
+/SQL/seed.sql # Donnés fictives de la base de donnée
+
+IA_NOTES.md # Notes à propos de l'utilisation de l'IA (Ce fichier).
+```
+
+### Reflexion :
+
+> Réfléchi pendant 3 minutes et 16 secondes
+
+
+> ### Lecture du projet
+> Je vais examiner l’action de vote, le format de réponse, le template des cartes et les scripts déjà chargés par la page. Cela permettra d’intégrer le JavaScript sans dépendance et de respecter les
+> conventions existantes.
+> ---
+> Je vais maintenant vérifier les champs transmis et la structure exacte des réponses JSON, puis observer comment les cartes sont rendues et stylées. Je pourrai ainsi choisir un contrat d’API
+> réutilisable et câbler le clic sans perturber le rendu PHP.
+> ---
+> Je vais vérifier le schéma des idées et la logique SQL d’incrémentation pour que le compteur affiché corresponde exactement au champ vote_approve. Ensuite, je pourrai ajouter les attributs de carte,
+> le bouton, le gestionnaire générique et son branchement dans la page.
+> ---
+> La structure retenue s’appuie sur `data-idea-id` pour relier chaque carte à l’action POST et sur un compteur accessible pour l’affichage dynamique. J’ajoute maintenant ces éléments au template et à
+> index.php, puis les deux scripts sans dépendance et un style léger pour le contrôle de vote.
+> --- 
+> ### Ajout et modification des fichiers.
+>
+> L’implémentation est en place dans le template, la page et les nouveaux scripts sous scripts/, sans toucher aux fichiers locaux déjà modifiés. Je vais contrôler la syntaxe PHP/JavaScript puis
+> exercer le gestionnaire sur des cas de succès, d’erreur HTTP et de réseau pour vérifier le contrat backend et l’absence de faux incrément.
+>
+> ### Vérification
+> Execution de `node --check scripts/action-manager.js && node --check scripts/vote.js` autorisé par l'utilisateur. (J'ai bien vérifié dans la
+> documentation: [Node --check](https://nodejs.org/api/cli.html#-check) )
+>
+> Execution de `php -l components/idea_card_template.php && php -l index.php` autorisé par l'utilisateur. (J'ai vérifié le `-l` via `man`.)
+>
+> Execution de
+> ```shell
+> node -e '
+> global.window = {};
+> global.fetch = async (url, options) => ({ok: true, status: 200, json: async () => ({message: "Nous avons bien ajouté votre vote."}), requestUrl: url, requestOptions: options});
+> require("./scripts/action-manager.js");
+> (async () => {
+> const result = await window.ActionManager.sendAction("actions/send_add_vote.php", {id: 5});
+> if (!result.ok || result.status !== 200 || result.message !== "Nous avons bien ajouté votre vote.") throw new Error("Réponse de succès inattendue");
+> if (global.lastRequest) throw new Error("unexpected");
+> global.fetch = async () => ({ok: false, status: 404, json: async () => ({message: "Cette idée n’existe pas."})});
+> const failure = await window.ActionManager.sendAction("actions/send_add_vote.php", {id: 999});
+> if (failure.ok || failure.status !== 404 || failure.message !== "Cette idée n’existe pas.") throw new Error("Erreur HTTP non gérée");
+> global.fetch = async () => {
+> throw new Error("offline");
+> };
+> const network = await window.ActionManager.sendAction("actions/send_add_vote.php", {id: 5});
+> if (network.ok || network.status !== null || !network.message.includes("réseau")) throw new Error("Erreur réseau non gérée");
+> console.log("Gestionnaire vérifié : succès, HTTP 404 et erreur réseau.");
+> })().catch((error) => {
+> console.error(error);
+> process.exitCode = 1;
+> });
+> '
+> ```
+> autorisé par l'utilisateur.
+>
+> ---
+> Les contrôles de syntaxe et les scénarios du gestionnaire passent. Je complète la vérification en simulant le clic sur une carte pour confirmer que son ID est envoyé, que le bouton est réactivé et
+> que le compteur ne bouge pas après un échec.
+>
+> --- 
+> Execution de `git diff -- components/idea_card_template.php index.php CSS/style.css scripts/action-manager.js scripts/vote.js && git status --short` autorisé automatiquement.
+>
+> Execution de
+> ```shell
+> node -e '
+> let clickHandler;
+> let sentRequest;
+> const count = {textContent: "2"};
+> const card = {dataset: {ideaId: "5"}, querySelector: () => count};
+> const button = {disabled: false, closest: () => card};
+> global.document = {
+>   querySelector: () => ({
+>   addEventListener: (eventName, handler) => {
+>   if (eventName === "click") clickHandler = handler;
+>   }
+>   })
+>   };
+>   global.ActionManager = {
+>   sendAction: async (url, data) => {
+>   sentRequest = {url, data};
+>   return {ok: true, status: 200, message: "Vote ajouté."};
+>   }
+> };
+> require("./scripts/vote.js");
+> const event = {target: {closest: (selector) => selector === ".vote-button" ? button : null}};
+> (async () => {
+>   await clickHandler(event);
+>   if (count.textContent !== "3" || sentRequest.url !== "actions/send_add_vote.php" || sentRequest.data.id !== "5" || button.disabled) throw new Error("Le vote réussi n’a pas été traité correctement");
+>   global.ActionManager.sendAction = async () => ({ok: false, status: 404, message: "Idée absente."});
+>   await clickHandler(event);
+>   if (count.textContent !== "3" || button.disabled) throw new Error("Un vote échoué a modifié le compteur ou bloqué le bouton");
+>   console.log("Interface vérifiée : ID envoyé, compteur incrémenté au succès seulement, bouton réactivé.");
+>   })()
+>   .catch((error) => {
+>     console.error(error);
+>     process.exitCode = 1;
+> });'
+> ``` 
+> autorisé par l'utilisateur.
+>
+>
+> Le vote AJAX est implémenté sur les cartes, avec un compteur basé uniquement sur vote_approve et une mise à jour après confirmation du serveur.
+>
+
+
+J'ajouterais une instruction "Propose du code clair à relire avant d'exécuter les commandes pour que je puisse plus facilement les relire, même pour des vérifications temporaires." car les codes de
+vérifications ont été pénibles à relire.
+
+### Réponse :
+
+> **Changes**
+> - Ajout de l’ID de l’idée, du compteur positif et du bouton +1 dans components/idea_card_template.php.
+> - Ajout de scripts/action-manager.js pour l’envoi POST générique et la gestion des réponses JSON, erreurs HTTP et réseau.
+> - Ajout de scripts/vote.js et chargement dans index.php ; journalisation séparée du traitement de la réponse, et incrément uniquement après succès.
+> - Mise en page légère des contrôles de vote dans CSS/style.css.
+>
+> **Verification**
+> - Vérifications de syntaxe PHP et JavaScript réussies.
+> - Simulations réussies pour les réponses de succès, HTTP 404, erreur réseau et clic avec mise à jour conditionnelle du compteur.
+>
+> **Notes**
+> - Aucun test contre une base de données réelle n’a été lancé ; les modifications locales préexistantes à .aiignore et IA_NOTES.md ont été préservées.
+
+### Relecture du code et interpretation des résultats :
+
+- Il a supprimé les deux commentaires en lien avec cette implémentation dans le template des cartes.
+- Rajouté l'id de la carte dans un `data-idea-id`.
+- Il a rajouté une section pour afficher les votes avec le css associé :
+
+```php
+<div class="idea-voting">
+    <p>Votes positifs : <span class="vote-count" aria-live="polite" aria-atomic="true">
+        <?= (int) ($result['vote_approve'] ?? 0); ?></span>
+    </p>
+    <button type="button" class="vote-button">+1</button>
+</div>
+```
+
+- Je vais devoir faire des recherches sur les propriétés d'accessibilité `aria-live: polite` et `aria-atomic`
+- Je change l'affichage pour retirer le texte "Votes positifs".
+
+- Il a bien ajouté un dossier `scripts` avec un fichier `action-manager.js` et `vote.js` et les a ajoutés à index.html. Il a bien précisé le `defer`.
+- Aucun commentaire ni aucune doc de fonctions.
+
+### Script action-manager.js
+
+- Il a directement ajouté un nouveau prototype à la windows `windows.ActionManager = (()=>{})()`, ce qui est une mauvaise pratique, j'aurais préféré une classe et une instance globale.
+
+### Script vote.js
+
+- A pris soin de désactiver le bouton pendant le chargement.
+- Il a ajouté une verification du html avant d'incrémenter le nombre affiché :
+
+```js
+const currentCount = Number(voteCount.textContent.trim());
+if (!Number.isSafeInteger(currentCount) || currentCount < 0 || currentCount === Number.MAX_SAFE_INTEGER) {
+    console.error('Le compteur de votes affiché est invalide.');
+    return;
+}
+```
+
+Je pense que c'est inutile étant donné qu'une erreur JS apparaitra s'il n'arrive pas à parser la valeur actuelle.
+
+## Je demande des modifications
+
+Prompt :
+> - Dans action-manager: J'aurais préféré une classe avec une instance global plutôt que d'ajouter un element à la windows.
+> - Ajoute des commentaires et des documentations de fonctions.
+> - Isole mieux l'affichage des résultats en créant des fonctions display_success et display_error.
+
+
+Relecture des scripts, les modifications sont bonnes.
+
+- Les nouvelles fonctions sont correctes :
+
+```js
+/** Displays a successful action result; replace this function to add another notification UI. */
+function display_success(message) {
+    console.info(message);
+}
+
+/** Displays a failed action result; replace this function to add another notification UI. */
+function display_error(message) {
+    console.error(message);
+}
+```
+
+Je retire cependant la fin des commentaires qui n'est pas nécessaire.
+
+```js
+const currentCount = Number(voteCount.textContent.trim());
+if (!Number.isSafeInteger(currentCount) || currentCount < 0 || currentCount === Number.MAX_SAFE_INTEGER) {
+    display_error('Le compteur de votes affiché est invalide.');
+    return;
+}
+```
+
+`display_error` ne devrait pas être utilisé ici car ce n'est pas une erreur normale. Je retire cette partie au regard de ce que j'ai signifié à l'itération précédante.
+
+### Test et exécution du code
+
+| Test                       | Résultat attendu                                                   | Résultat                                                         |
+|----------------------------|--------------------------------------------------------------------|------------------------------------------------------------------|
+| Rien a cassé               | Le site se lance sans erreur et affiche bien le catalogue          | Correct                                                          |
+| Nombre de vote             | Le nombre de vote est affiché sur chaque carte et est correct      | Correct                                                          |
+| Script load et event       | Le script se charge bien et le catalogue possède un event listener | Pas d'erreur dans la console + event                             |
+| ça fonctionne              | Clicker sur un bouton envois la requête                            | Nouvelle requête `send_add_vote` au click avec le bon id         |
+| Validation de la requête   | Le backend ne renvois pas d'erreur et incrémente la db             | Correct                                                          |
+| Traitement de la réponse   | Message de success dans la console                                 | Le message dans la console est bien celui renvoyé par le backend |
+| Mise à jour de l'affichage | Le compteur de vote est incrémenté au click                        | Correct                                                          |
+
+| Test                  | Configuration                                              | Résultat attendu                                                                        | Résultat |
+|-----------------------|------------------------------------------------------------|-----------------------------------------------------------------------------------------|----------|
+| Affichage d'erreur    | Je force le backend a renvoyer une erreur                  | L'erreur du backend apparait dans la console et l'affichage ne change pas               | Correct  |
+| Cas hors service      | Je coupe le serveur et tente d'ajouter un vote             | Erreur dans la console "Impossible de contacter le serveur (erreur réseau)."            | Correct  |
+| Erreurs de validation | Je change la requête pour une invalide string + id inconnu | L'erreur de validation du backend apparait dans la console et l'affichage ne change pas | Correct  |
 
