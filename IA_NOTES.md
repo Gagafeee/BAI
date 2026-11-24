@@ -93,10 +93,18 @@ Le prompt :
     <td>Selon l'IA cela permettrait de couvrir les cas où l'idée est supprimé entre le SELECT et l'UPDATE, je trouve cette idée intéressante.
         Je découvre en l'implémentant que celà entre en conflit avec le point 4. Je vais donc laisser l'implémentation telle quelle pour bien s'assurer de renvoyer un 404. Mais j'ajoute tout de même une validation en cas d'erreurs effective. 
     Cela necessiterait l'implémentation d'un système d'erreur personnalisé qui n'est pas justifié pour ce type d'application.
-</td>
+    </td>
     <td>Partiellement Accepté</td>
     <td>Cela permet effectivement de rendre plus robuste l'action.</td>
-    <td>66ff1c0b</td>
+    <td>f178c079</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Faute de copié-collé dans le message d'erreur dans getIdea().</td>
+    <td>La faute est bien présente</td>
+    <td>Accepté</td>
+    <td>Cela permet effectivement de rendre plus robuste l'action.</td>
+    <td>f178c079</td>
 </tr>
 </table>
 

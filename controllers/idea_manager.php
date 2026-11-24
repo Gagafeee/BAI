@@ -34,7 +34,7 @@ function getIdea(int $id)
         $query->execute([":id" => $id]);
         return $query->fetch();
     } catch (PDOException $error) {
-        throw new Exception("Impossible d'ajouter votre idée : La base de donnée à renvoyé une erreur.");
+        throw new Exception("Impossible de récupérer les informations de votre idée : La base de donnée à renvoyé une erreur.");
     }
 }
 
