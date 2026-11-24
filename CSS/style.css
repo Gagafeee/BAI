@@ -21,3 +21,20 @@ body div form .idea #content{
     height: 64px;
     color: gray;
 }
+
+.catalogue {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 70px;
+    padding-top: 32px;
+    background-color: beige;
+}
+
+.card {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.idea{
+    background-color: gray;
+}
