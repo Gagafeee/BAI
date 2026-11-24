@@ -31,7 +31,8 @@
 </div>
 
 <div>
-    <!--TODO: Bouton pour ajouter un vote sur une idée. Remplacer le     '1' par l'id de l'idée.-->
+    <!--TODO: Ne pas oublier d'ajouter la mise à jour de l'UI après avoir ajouté +1-->
+    <!--TODO: Bouton pour ajouter un vote sur une idée. Remplacez le     '1' par l'id de l'idée.-->
     <button onclick="sendActionRequest('/actions/send_add_vote.php', {id: 1})">+1</button>
 </div>
 </body>
