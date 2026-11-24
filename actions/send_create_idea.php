@@ -26,7 +26,7 @@ $data["pseudo"] = $author_pseudo;
 # Execute
 try {
     addIdea($data);
-    set_redirect_successful("/", "Nous avons bien ajouté votre idée.");
+    set_redirect_successful("", "Nous avons bien ajouté votre idée.");
 } catch (Exception $e) {
     echo $e;
 }

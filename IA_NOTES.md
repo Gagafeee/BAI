@@ -146,6 +146,15 @@ Le prompt :
     <td>C'est un comportement volontaire, je n'ajoute pas d'exit dans les fonctions concernées comme le propose l'IA. Mais je renomme les fonctions redirect* en set_redirect* et je précise leur doc pour éviter les futures erreurs de manipulations et clarifier leur fonctionnement.</td>
     <td>ef9a6b15</td>
 </tr>
+<tr>
+    <td>13</td>
+    <td>Possible faille car les location ne sont pas validé dans les fonctions de redirections. "si un jour tu passes une chaîne provenant de l'utilisateur (paramètre ?next=…), tu ouvres une faille de type redirection ouverte"</td>
+    <td>Il n'existe pas réellement de faille, mais une pourait effectivement apparaître un jour.
+    Après reflexion, je peux corriger cette erreur simplement</td>
+    <td>Partiellement Accepté</td>
+    <td>Je transforme $location en position relative en ajoutant un "/" devant. J'adapte la doc des fonctions. Je reteste avec les implémentations existantes. La racine du projet devient "/" → "".</td>
+    <td>ef9a6b15</td>
+</tr>
 
 </table>
 
