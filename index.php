@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Boite à idée</title>
     <link rel="stylesheet" href="CSS/style.css">
-    <script src="/scripts/form_action.js" defer></script>
 </head>
 
 <body>
@@ -33,7 +32,6 @@
 <div>
     <!--TODO: Ne pas oublier d'ajouter la mise à jour de l'UI après avoir ajouté +1-->
     <!--TODO: Bouton pour ajouter un vote sur une idée. Remplacez le     '1' par l'id de l'idée.-->
-    <button onclick="sendActionRequest('/actions/send_add_vote.php', {id: 1})">+1</button>
 </div>
 </body>
 
