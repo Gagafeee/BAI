@@ -11,6 +11,9 @@ require 'components/card_functions.php';
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Boite à idée</title>
     <link rel="stylesheet" href="CSS/style.css">
+    <!--toastify lib-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
 </head>
 
 <body>

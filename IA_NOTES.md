@@ -487,3 +487,27 @@ if (!Number.isSafeInteger(currentCount) || currentCount < 0 || currentCount === 
 | Cas hors service      | Je coupe le serveur et tente d'ajouter un vote             | Erreur dans la console "Impossible de contacter le serveur (erreur réseau)."            | Correct  |
 | Erreurs de validation | Je change la requête pour une invalide string + id inconnu | L'erreur de validation du backend apparait dans la console et l'affichage ne change pas | Correct  |
 
+## Ajout d'une librairie de notifications
+
+- J'ai moi-même cherché et ajouté la librairie Toastify d'après leur guide. (je ne laisse pas l'IA choisir ni implémenter la lib)
+
+Prompt :
+>
+> I added the toastify library, modify the code to display a success notification when the request is successful and the returned error otherwise
+>
+
+> Worked for 7s
+>
+> Vote success and error results now use Toastify notifications, with distinct green and red styling respectively. The existing response handling and success-only vote-count increment remain
+> unchanged.
+> **Changes**
+> - Replaced console output in display_success and display_error with Toastify toasts.
+> - Success toasts display for 3 seconds; error toasts display for 4 seconds, both closable.
+
+Je redéfinis le délai d'affichage des erreurs à 10s pour plus de lisibilité et j'ajoute `stopOnFocus: true` d'après la documentation.
+
+| Test   | Résultat attendu                                                                           | Résultat |
+|--------|--------------------------------------------------------------------------------------------|----------|
+| Import | La librairie est bien importé et pas d'erreur                                              | Correct  |
+| Succès | Une notification apparait lorsque j'ajoute un vote et le compteur se met toujours à jours. | Correct  |
+| Erreur | Une notification d'erreur apparait lors d'une erreur.                                      | Correct  |
