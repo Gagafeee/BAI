@@ -14,7 +14,7 @@
     </header>
 
     <div>
-        <form action="/actions/send_create_idea.php">
+        <form action="/actions/send_create_idea.php" method="POST">
             <div>
             <input type="text" maxlength="30" placeholder="Votre pseudo..." name="pseudo" id="pseudo">
             <input type="hidden" name="">

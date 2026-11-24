@@ -5,17 +5,17 @@ require_once __DIR__ . '/../controllers/idea_manager.php';
 $data = [];
 
 # Idea title
-$idea_title = $_GET["title"];
+$idea_title = $_POST["title"];
 # TODO: Add validation
 $data["title"] = $idea_title;
 
 # Idea content
-$idea_content = $_GET["content"];
+$idea_content = $_POST["content"];
 # TODO: Add validation
 $data["description"] = $idea_content;
 
 # Author pseudo
-$author_pseudo = $_GET["pseudo"];
+$author_pseudo = $_POST["pseudo"];
 # TODO: Add validation
 $data["pseudo"] = $author_pseudo;
 
