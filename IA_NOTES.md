@@ -85,7 +85,18 @@ Le prompt :
     <td>Je pense que celà n'est pas nécéssaire pour une application de cette taille parce que cela pourrait provoquer des erreurs en fonction des méthodes d'envois des requêtes, mais je l'implémente quand même.</td>
     <td>Accepté</td>
     <td>Cela permet effectivement de rendre plus robuste l'action.</td>
-    <td>b2d30a78</td>
+    <td>66ff1c0b</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Proposition d'optimisation de l'opération en ne vérifiant pas si l'id existe avant de mettre à jour, mais renvoyer une erreur en cas de 404 de la base de donnée.</td>
+    <td>Selon l'IA cela permettrait de couvrir les cas où l'idée est supprimé entre le SELECT et l'UPDATE, je trouve cette idée intéressante.
+        Je découvre en l'implémentant que celà entre en conflit avec le point 4. Je vais donc laisser l'implémentation telle quelle pour bien s'assurer de renvoyer un 404. Mais j'ajoute tout de même une validation en cas d'erreurs effective. 
+    Cela necessiterait l'implémentation d'un système d'erreur personnalisé qui n'est pas justifié pour ce type d'application.
+</td>
+    <td>Partiellement Accepté</td>
+    <td>Cela permet effectivement de rendre plus robuste l'action.</td>
+    <td>66ff1c0b</td>
 </tr>
 </table>
 
