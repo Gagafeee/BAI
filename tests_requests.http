@@ -1,8 +1,8 @@
-# Create new idea
+### Create new idea
 
 POST localhost:8080/actions/send_create_idea.php
 Content-Type: application/x-www-form-urlencoded
 
-title = "Mysuper idea" &
-content = "content" &
-pseudo = "I'm the author"
+title = Mysuper idea &
+content = content &
+pseudo = I'm the author

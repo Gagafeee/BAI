@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . '/../controllers/idea_manager.php';
+require_once __DIR__ . '/../libs/response.php';
 
 # Construct data from request
 $data = [];
@@ -22,6 +23,7 @@ $data["pseudo"] = $author_pseudo;
 # Execute
 try {
     addIdea($data);
+    redirect_successful("/", "Nous avons bien ajouté votre idée.");
 } catch (Exception $e) {
     echo $e;
 }
