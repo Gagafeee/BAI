@@ -5,8 +5,9 @@ require_once __DIR__ . '/../libs/response.php';
 # idea id
 $idea_id = $_POST["id"];
 if (!isset($idea_id)) respond_error(400, "Impossible d'ajouter un vote : Aucune idée n'a été spécifié.");
-$idea_id = (int)$idea_id;
-if (gettype($idea_id) != "integer") respond_error(400, "Impossible d'ajouter un vote : L'identifiant de l'idée n'est pas valide.");
+# Vérifie que tous les caractères de la chaine sont bien des chiffres.
+if (!ctype_digit($idea_id)) respond_error(400, "Impossible d'ajouter un vote : L'identifiant de l'idée n'est pas valide.");
+$idea_id = intval($idea_id);
 
 # Execute
 try {
