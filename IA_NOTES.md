@@ -136,7 +136,15 @@ Le prompt :
     <td>L'IA indique que les check message !== null et error !== null dans request.php sont inutiles car les variables ne sont pas nullables, L'IA propose de les remplacer par !== ''. Cela ne corrige aucun bug puisque le message vide était encodé en HTML et ne revoyait rien.</td>
     <td>Accepté</td>
     <td>Je corrige le bug pour assurer la cohérence du programme.</td>
-    <td>3a2dd9bc</td>
+    <td>8ae4b030</td>
+</tr>
+<tr>
+    <td>12</td>
+    <td>Les fonctions redirect* n'arrêtent pas l'exécution du programme après avoir défini la redirection.</td>
+    <td>L'IA indique que les programme pourrait continuer à s'exécuter après un redirect.</td>
+    <td>Partiellement Accepté</td>
+    <td>C'est un comportement volontaire, je n'ajoute pas d'exit dans les fonctions concernées comme le propose l'IA. Mais je renomme les fonctions redirect* en set_redirect* et je précise leur doc pour éviter les futures erreurs de manipulations et clarifier leur fonctionnement.</td>
+    <td>ef9a6b15</td>
 </tr>
 
 </table>
