@@ -9,7 +9,7 @@ $idea_id = $_POST["id"];
 # Execute
 try {
     add_approve_vote($idea_id);
-    redirect_successful("/", "Nous avons bien ajouté votre vote.");
+    respond_success("Nous avons bien ajouté votre vote.");
 } catch (Exception $e) {
     echo $e;
 }
