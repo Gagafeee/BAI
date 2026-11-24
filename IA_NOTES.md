@@ -55,6 +55,7 @@ Le prompt :
     <td>La fonctionnalité est explicitement bonus (US 15). Je ne l'implémente pas directement.</td>
     <td></td>
 </tr>
+<tr>send_add_vote.php</tr>
 <tr>
     <td>2</td>
     <td>send_add_vote.php:6 — $_POST\["id"\] est lu avant le isset(). Si la clé manque, PHP émet un Warning: Undefined array key avant même ton test.</td>
@@ -87,6 +88,7 @@ Le prompt :
     <td>Cela permet effectivement de rendre plus robuste l'action.</td>
     <td>66ff1c0b</td>
 </tr>
+<tr>idea_manager.php</tr>
 <tr>
     <td>6</td>
     <td>Proposition d'optimisation de l'opération en ne vérifiant pas si l'id existe avant de mettre à jour, mais renvoyer une erreur en cas de 404 de la base de donnée.</td>
@@ -130,6 +132,7 @@ Le prompt :
     <td>Je vais continuer cependant d'utiliser le snake case, car il est déjà utilisé dans le projet. Le changement de norme devrait constituer un refactor global.</td>
     <td>3a2dd9bc</td>
 </tr>
+<tr>redirect.php</tr>
 <tr>
     <td>11</td>
     <td>Mauvaises conditions dans les fonctions de réponses.</td>
@@ -153,7 +156,66 @@ Le prompt :
     Après reflexion, je peux corriger cette erreur simplement</td>
     <td>Partiellement Accepté</td>
     <td>Je transforme $location en position relative en ajoutant un "/" devant. J'adapte la doc des fonctions. Je reteste avec les implémentations existantes. La racine du projet devient "/" → "".</td>
-    <td>ef9a6b15</td>
+    <td>52072093</td>
+</tr>
+<tr>
+    <td>14</td>
+    <td>?status=200 dans la chaîne de requête est redondant avec un vrai code HTTP</td>
+    <td>Je pourrais effectivement utiliser le vrai status de la requête.</td>
+    <td>Mis en attente</td>
+    <td>Je m'occuperai de faire ce choix lors de l'implémentation des systèmes AJAX.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>15</td>
+    <td>exit est préférable à die() pour stopper l'exécution dans respond_error().</td>
+    <td>Je découvre que contrairement à ce que dit l'IA, die et exit sont fonctionnellement identique (alias d'après la documentation PHP). Je comprends que exit est souvent utilisé plutôt que die pour représenter un arrêt controller de l'exécution du programme, alors que die représente une erreur fatale.</td>
+    <td>Refusé</td>
+    <td>Je garde die pour éviter de rendre le projet plus compliquer à lire puisqu'il n'y a aucune différence.</td>
+    <td></td>
+</tr>
+<tr>db.php</tr>
+<tr>
+    <td>16</td>
+    <td>die("Erreur de connexion…") trop imprécis.</td>
+    <td>L'IA suggère de remplacer par un throw new RuntimeException(...)</td>
+    <td>Refusé</td>
+    <td>Je garde cette simple erreur car elle suffisante et cela permets de conserver le code proposé par le professeur.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>17</td>
+    <td>S'assurer que config.php est hors de la racine du projet pour éviter un accès non-authorisé.</td>
+    <td>Après check à https://localhost/config.php, la page renvois bien une page mais avec un contenu vide car toutes les variables sont en php. C'est tout de même une vulnérabilité à surveiller.</td>
+    <td>Refusé</td>
+    <td>Ce n'est pas une réelle faille pour le moment mais je note la remarque pour le futur.</td>
+    <td></td>
+</tr>
+<tr>setup.sql</tr>
+<tr>
+    <td>18</td>
+    <td>vote_against n'est jamais utilisé : à supprimer</td>
+    <td></td>
+    <td>Refusé</td>
+    <td>Nous avons prévu depuis le début d'ajouter des votes pour et contre. Cela n'est pas prévu dans le backlog mais sa suppression devra être traité en équipe.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>19</td>
+    <td>Ajouter un index sur vote_approve pour optimiser le futur tri.</td>
+    <td>À chercher si l'index peut vraiment accélérer une recherche si simple</td>
+    <td>Je note</td>
+    <td>Hors du cadre mais pertinent.</td>
+    <td></td>
+</tr>
+<tr>Autre</tr>
+<tr>
+    <td>20</td>
+    <td>Faute de français récurrente 🫠.</td>
+    <td>« La base de donnée <b>à</b> renvoyé une erreur » Le seum de toujours faire des fautes aussi bêtes...</td>
+    <td>Accepté</td>
+    <td></td>
+    <td></td>
 </tr>
 
 </table>
