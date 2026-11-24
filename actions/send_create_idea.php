@@ -2,6 +2,9 @@
 require_once __DIR__ . '/../controllers/idea_manager.php';
 require_once __DIR__ . '/../libs/response.php';
 
+# Check request method
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') respond_error(405);
+
 # Construct data from request
 $data = [];
 

@@ -43,32 +43,33 @@ Le prompt :
     <th>N°</th>
     <th>Remarque de l'IA</th>
     <th>Ce que j'ai vérifié</th>
-    <th>Correction</th>
     <th>Décision</th>
     <th>Pourquoi</th>
+    <th>Commit</th>
 </tr>
 <tr>
     <td>1</td>
     <td>Le vrai problème : aucun anti-double-vote<br/>L'IA relève le fait qu'il est possible d'ajouter des votes à l'infini sans aucune validation ou auth <br/>"C'est le cœur du besoin et il n'est pas traité. Sans authentification ni garde-fou, n'importe qui peut inclure un vote en boucle (script de 3 lignes, ou même F5 sur un bouton) et gonfler arbitrairement les scores. Le point 2 de ta spec ("le système doit rester simple") ne justifie pas ce vide : la valeur métier d'un vote est nulle s'il est répétable à l'infini."</td>
     <td>Les specs</td>
-    <td></td>
     <td>Refusé</td>
     <td>La fonctionnalité est explicitement bonus (US 15). Je ne l'implémente pas directement.</td>
+    <td></td>
 </tr>
 <tr>
     <td>2</td>
     <td>send_add_vote.php:6 — $_POST\["id"\] est lu avant le isset(). Si la clé manque, PHP émet un Warning: Undefined array key avant même ton test.</td>
     <td>Le code spécifié</td>
-    <td>
-
-```php
-$idea_id = $_POST["id"] ?? null;
-```
-
-</td>
     <td>Accepté</td>
     <td>Cela permet effectivement de rendre plus robuste la validation. Je propage ces changements au reste des actions.</td>
-
+    <td>3235e182</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Pas de check de la méthode de requête</td>
+    <td>Test GET actions/send_add_vote.php?id=12</td>
+    <td>Accepté</td>
+    <td>Cela permet effectivement de rendre plus robuste la validation. Je propage ces changements au reste des actions.</td>
+    <td>3235e182</td>
 </tr>
 </table>
 

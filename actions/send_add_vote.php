@@ -2,6 +2,9 @@
 require_once __DIR__ . "/../controllers/idea_manager.php";
 require_once __DIR__ . '/../libs/response.php';
 
+# Check request method
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') respond_error(405);
+
 # idea id
 $idea_id = $_POST["id"] ?? null;
 if (!isset($idea_id)) respond_error(400, "Impossible d'ajouter un vote : Aucune idée n'a été spécifié.");
