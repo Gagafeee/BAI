@@ -1,3 +1,7 @@
+<?php
+require 'components/card_functions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,7 +34,10 @@
     </div>
 
     <div>
-
+        <div></div>
+        <div class="catalogue">
+            <?php addIdea(); ?>
+        </div>
     </div>
 </body>
 
