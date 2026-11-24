@@ -14,8 +14,6 @@ function addIdea(array $idea): void
 
 function add_approve_vote(int $idea_id): void
 {
-    if (doesIdeaExist($idea_id) === false) throw new Exception("Impossible d'ajouter votre vote : Cette idée n'existe pas.");
-
     try {
         $pdo = getPDO();
 

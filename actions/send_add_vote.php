@@ -11,6 +11,7 @@ if (!isset($idea_id)) respond_error(400, "Impossible d'ajouter un vote : Aucune
 # Vérifie que tous les caractères de la chaine sont bien des chiffres.
 if (!ctype_digit($idea_id)) respond_error(400, "Impossible d'ajouter un vote : L'identifiant de l'idée n'est pas valide.");
 $idea_id = intval($idea_id);
+if (doesIdeaExist($idea_id) === false) respond_error(404, "Impossible d'ajouter votre vote : Cette idée n'existe pas.");
 
 # Execute
 try {

@@ -68,8 +68,16 @@ Le prompt :
     <td>Pas de check de la méthode de requête</td>
     <td>Test GET actions/send_add_vote.php?id=12</td>
     <td>Accepté</td>
-    <td>Cela permet effectivement de rendre plus robuste la validation. Je propage ces changements au reste des actions.</td>
-    <td>3235e182</td>
+    <td>Cela permet effectivement de rendre plus robuste l'action. Je propage ces changements au reste des actions.</td>
+    <td>aeb64ff8</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Lorsque l'id de l'idée n'existe pas, une erreur 500 est renvoyé à la place de 404.</td>
+    <td>La justification est correcte et cela provient d'un problème d'architecture de ma part.</td>
+    <td>Accepté</td>
+    <td>Cela permet effectivement de rendre plus robuste l'action.</td>
+    <td>aeb64ff8</td>
 </tr>
 </table>
 
