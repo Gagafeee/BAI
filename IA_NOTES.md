@@ -104,7 +104,32 @@ Le prompt :
     <td>La faute est bien présente</td>
     <td>Accepté</td>
     <td>Cela permet effectivement de rendre plus robuste l'action.</td>
-    <td>f178c079</td>
+    <td>f035b3a4</td>
 </tr>
+<tr>
+    <td>8</td>
+    <td>gettype(...) == "array" : fragile et verbeux</td>
+    <td>L'IA propose de remplacer par une simple verification du retour de fetch. Qui renvois false si aucune ligne n'a été trouvé.</td>
+    <td>Refusé</td>
+    <td>Même si cela parait être la solution largement utilisée, je préfère comparer le type voulu plutôt que l'erreur potentielle. Cela peut être pratique au cas où getIdea() change d'implémentation.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>9</td>
+    <td>Le catch de l'insertion ne fait rien de la PDOException, une nouvelle exception est renvoyé sans donnée de l'erreur d'origine.</td>
+    <td>L'IA propose de remplacer par un error_log qui, après recherche, écrit l'erreur dans un fichier de log sur le système.</td>
+    <td>Refusé</td>
+    <td>Le remplacement de l'erreur est volontaire pour ne pas renvoyer les erreurs internes de la base de donnée pour des raisons de sécurités. Je préfère ne pas implémenter le système de log pour l'instant.</td>
+    <td></td>
+</tr>
+<tr>
+    <td>10</td>
+    <td>Nommage incohérent: addIdea / getIdea / doesIdeaExist (camelCase) contre add_approve_vote (snake_case)</td>
+    <td>L'IA indique d'utiliser "idéalement camelCase homogène à la PSR-1/12". Après recherche le document <a href="https://www.php-fig.org/psr/psr-12/#21-basic-coding-standard">PSR 12 section 2.1</a> recommande le PascalCase.</td>
+    <td>Accepté</td>
+    <td>Je vais continuer cependant d'utiliser le snake case, car il est déjà utilisé dans le projet. Le changement de norme devrait constituer un refactor global.</td>
+    <td></td>
+</tr>
+
 </table>
 

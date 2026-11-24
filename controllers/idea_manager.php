@@ -25,7 +25,7 @@ function add_approve_vote(int $idea_id): void
     }
 }
 
-function getIdea(int $id)
+function get_idea(int $id)
 {
     try {
         $pdo = getPDO();
@@ -38,7 +38,7 @@ function getIdea(int $id)
     }
 }
 
-function doesIdeaExist(int $id): bool
+function does_idea_exist(int $id): bool
 {
-    return gettype(getIdea($id)) == "array";
+    return gettype(get_idea($id)) == "array";
 }
