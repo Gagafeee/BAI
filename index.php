@@ -1,3 +1,7 @@
+<?php
+require 'components/card_functions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -30,8 +34,10 @@
 </div>
 
 <div>
-    <!--TODO: Ne pas oublier d'ajouter la mise à jour de l'UI après avoir ajouté +1-->
-    <!--TODO: Bouton pour ajouter un vote sur une idée. Remplacez le     '1' par l'id de l'idée.-->
+    <div></div>
+    <div class="catalogue">
+        <?php addIdea(); ?>
+    </div>
 </div>
 </body>
 
