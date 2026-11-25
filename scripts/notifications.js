@@ -22,3 +22,29 @@ function display_error(message) {
         style: {background: '#c62828'}
     }).showToast();
 }
+
+
+// Intercept url parameters
+document.addEventListener("DOMContentLoaded", () => {
+    const parameters = new URLSearchParams(document.location.search);
+    if (parameters.has("status")) {
+        try {
+
+            const status = parseInt(parameters.get("status"));
+            let message = parameters.get("message").trim();
+            if (message.length === 0) message = null;
+
+            if (status <= 299) display_success(message ?? "L'opération a bien été traité.");
+            else display_error(message ?? "Une erreur est survenue.");
+
+        } catch (e) {
+            console.error(e);
+        }
+
+        // Remove all parameters from URL
+        // Source - https://stackoverflow.com/a/41061471
+        // Posted by evanjmg, modified by community. See post 'Timeline' for change history
+        // Retrieved 2026-11-25, License - CC BY-SA 4.0
+        window.history.replaceState(null, '', window.location.pathname);
+    }
+});
