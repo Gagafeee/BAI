@@ -1,18 +1,18 @@
-<article class="idea" data-idea-id="<?= (int)$result['id']; ?>">
+<article class="idea" data-idea-id="<?= htmlspecialchars($result['id']); ?>">
     <div class="content">
-        <div class="info"><?= $result['pseudo']; ?></div>
+        <div class="info"><?= htmlspecialchars($result['pseudo']); ?></div>
 
-        <h2><?= $result['title']; ?></h2>
+        <h2><?= htmlspecialchars($result['title']); ?></h2>
 
         <p>
-            <?= $result['description']; ?>
+            <?= htmlspecialchars($result['description']); ?>
         </p>
 
         <div class="idea-voting">
-            <p><span class="vote-count" aria-live="polite" aria-atomic="true"><?= (int)($result['vote'] ?? 0); ?></span> votes</p>
+            <p><span class="vote-count" aria-live="polite" aria-atomic="true"><?= htmlspecialchars(($result['vote'] ?? 0)); ?></span> votes</p>
             <button type="button" class="vote-button">+1</button>
         </div>
 
-        <span><?= $result['created_at']; ?></span>
+        <span><?= htmlspecialchars($result['created_at']); ?></span>
     </div>
 </article>
