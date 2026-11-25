@@ -25,8 +25,9 @@ Prompt :
 > Je précise que le site ne possède pas de système d'authentification et ne prévoit pas d'en ajouter pour le moment, il est donc possible d'ajouter des votes à l'infini, c'est le comportement
 > souhaité.
 >
-> Le modèle est en mode `plannification`, il a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les données sensibles via
-> un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
+
+Le modèle est en mode `plannification`, il a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les données sensibles via
+un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
 
 ### Réponse :
 
