@@ -31,11 +31,16 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             const status = parseInt(parameters.get("status"));
-            let message = parameters.get("message").trim();
-            if (message.length === 0) message = null;
 
-            if (status <= 299) display_success(message ?? "L'opération a bien été traité.");
-            else display_error(message ?? "Une erreur est survenue.");
+            if (status <= 299) {
+                let message = parameters.get("message").trim();
+                if (message.length === 0) message = "L'opération a bien été traité.";
+                display_success(message);
+            } else {
+                let error = parameters.get("error").trim();
+                if (error.length === 0) error = "Une erreur est survenue.";
+                display_error(error);
+            }
 
         } catch (e) {
             console.error(e);
