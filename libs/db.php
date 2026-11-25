@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../config.php';
+require_once __DIR__ . '/../config.example.php';
 
 function getPDO(): PDO {
     static $pdo = null;

@@ -16,7 +16,6 @@ require 'components/card_functions.php';
 <body>
     <header>
     </header>
-
     <div>
         <form action="/actions/send_create_idea.php">
             <div>
@@ -32,23 +31,21 @@ require 'components/card_functions.php';
             </div>
         </form>
     </div>
-
     <div>
-<<<<<<< HEAD
-        <form >
+        <form class="trie" id="form-tri">
             <label>Trié par ...</label>
              <select id="trie" name="trie" >
-                                <option >Alphabétique</option>
-                                <option >Plus récent</option>
-                                <option >Plus voté</option>
-                            </select>
-=======
-        <div></div>
+                <option value="ancien" >Plus ancien</option>
+                <option value="recent">Plus récent</option>
+                <option value="note">Plus voté</option>
+            </select>
+    </div>
+    <div>
         <div class="catalogue">
             <?php addIdea(); ?>
         </div>
->>>>>>> 8420a8a209b886cbbfdc338bc394d5f8b4b88302
     </div>
+    <script src="JS/tri.js"></script>
 </body>
 
 
