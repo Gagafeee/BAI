@@ -68,9 +68,11 @@ Prompt :
     <td>L'IA indique je les messages retournés du serveurs sont passé directement à la libraire Toastify sans protection. Ce n'est pas une faille car la librarie utilise déjà son propre système de protection.</td>
     <td>Accepté</td>
     <td>J'ajoute tout de même htmlspecialchars dans les réponses JSON pour ne pas dépendre de la protection de la libraire.</td>
-    <td>3e6952d3</td>
+    <td>b7b4e69b</td>
 </tr>
 </table>
+
+Les autres remarques parlent des méthodes déjà en places.
 
 ---
 
