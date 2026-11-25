@@ -53,7 +53,7 @@ require 'components/card_functions.php';
 <script src="scripts/notifications.js" defer></script>
 <script src="scripts/action-manager.js" defer></script>
 <script src="scripts/vote.js" defer></script>
-<script src="JS/tri.js"></script>
+<script src="scripts/tri.js"></script>
 </body>
 
 
