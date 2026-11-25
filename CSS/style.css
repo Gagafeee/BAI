@@ -45,3 +45,8 @@ body div form .idea #content{
     justify-content: space-between;
     gap: 16px;
 }
+
+.trie{
+    background-color: aquamarine;
+    color: darkcyan;
+}

@@ -32,19 +32,28 @@ require 'components/card_functions.php';
         </div>
         <div>
             <input type="submit" value="envoyer">
-        </div>
-    </form>
-</div>
-
-<div>
-    <div></div>
-    <div class="catalogue">
-        <?php addIdea(); ?>
+            </div>
+        </form>
     </div>
-</div>
+    <div>
+        <form class="trie" id="form-tri">
+            <label>Trié par ...</label>
+            <select id="trie" name="trie" >
+                <option value="ancien" >Plus ancien</option>
+                <option value="recent">Plus récent</option>
+                <option value="note">Plus voté</option>
+            </select>
+    </div>
+    <div>
+        <div></div>
+        <div class="catalogue">
+            <?php addIdea(); ?>
+        </div>
+    </div>
 <script src="scripts/notifications.js" defer></script>
 <script src="scripts/action-manager.js" defer></script>
 <script src="scripts/vote.js" defer></script>
+<script src="JS/tri.js"></script>
 </body>
 
 
