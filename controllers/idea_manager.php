@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . "/../libs/db.php";
 
-const MAX_DESCRIPTION_LENGTH = 500;
+const MAX_DESCRIPTION_LENGTH = 150;
 function isIdeaApproved(array $idea): void
 {
     try {
