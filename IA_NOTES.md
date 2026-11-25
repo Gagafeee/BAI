@@ -37,13 +37,13 @@ Prompt :
 > Je précise que le site ne possède pas de système d'authentification et ne prévoit pas d'en ajouter pour le moment, il est donc possible d'ajouter des votes à l'infini, c'est le comportement
 > souhaité.
 >
-Le modèle est en mode `plannification`, il a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les données sensibles via
-un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
+> Le modèle est en mode `plannification`, il a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les données sensibles via
+> un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
 
 ### Réponse :
 
 > Aucun XSS directement exploitable n’a été confirmé dans le rendu normal des idées. Un point de sortie PHP reste à durcir, et la sécurité des notifications dépend de la bibliothèque externe.
-> 
+>
 
 <table>
 <tr>
@@ -56,11 +56,19 @@ un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
 </tr>
 <tr>
     <td>1</td>
-    <td>Possible vulnérabilité dans les messages d'erreurs dans send_create_idea.php</td>
+    <td>Possible future vulnérabilité dans les messages d'erreurs dans send_create_idea.php</td>
     <td>Le code en question, l'IA fait remarqué qu'une faille pourrait un jour apparaître si un des messages d'erreurs contient une donnée dynamique.</td>
     <td>Accepté</td>
     <td>C'est une bonne remarque pour éviter une faille future, j'ajoute htmlspecialchars.</td>
-    <td></td>
+    <td>3e6952d3</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Possible future vulnérabilité dans les messages des notifications</td>
+    <td>L'IA indique je les messages retournés du serveurs sont passé directement à la libraire Toastify sans protection. Ce n'est pas une faille car la librarie utilise déjà son propre système de protection.</td>
+    <td>Accepté</td>
+    <td>J'ajoute tout de même htmlspecialchars dans les réponses JSON pour ne pas dépendre de la protection de la libraire.</td>
+    <td>3e6952d3</td>
 </tr>
 </table>
 

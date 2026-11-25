@@ -35,9 +35,14 @@ function set_redirect_error(string $location, int $error_code = 500, string $err
 function respond_success(?string $message): void
 {
     header('Content-Type: application/json; charset=utf-8');
-    echo json_encode(['message' => $message]);
+    echo json_encode(['message' => htmlspecialchars($message)]);
 }
 
+/**
+ * @param array $content
+ * @return void
+ * WARNING: This function allow XSS injections, ALWAYS MAKE SURE that the provided content has correctly been escaped.
+ */
 function respond_success_with_content(array $content): void
 {
     header('Content-Type: application/json; charset=utf-8');
@@ -50,7 +55,7 @@ function respond_error(?int $status = 500, ?string $message = "Une erreur est su
 {
     header('Content-Type: application/json; charset=utf-8');
     http_response_code($status);
-    echo json_encode(['message' => $message]);
+    echo json_encode(['message' => htmlspecialchars($message)]);
     die();
 }
 
