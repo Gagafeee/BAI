@@ -1,5 +1,33 @@
 <?php
 require_once __DIR__ . "/../libs/db.php";
+
+const MAX_DESCRIPTION_LENGTH = 500;
+function isIdeaApproved(array $idea): void
+{
+    try {
+        $pdo = getPDO();
+
+        $query = $pdo->prepare("INSERT INTO ideas (pseudo, title, description) VALUES (:pseudo, :title, :description);");
+        $query->execute($idea);
+    } catch (PDOException $error) {
+        throw new Exception("Une erreur s'est produite, veuillez réessayer.");
+    }
+    function isIdeaApproved(array $idea): bool
+    {
+        
+        if (trim($idea['description'] ?? '') === 0) 
+        {
+            return true;
+            echo "Erreur";
+        }
+        if (ctype_space($idea['description'])) {
+            return true;
+            echo "Erreur";
+        }
+        return false;
+    }
+}
+
 function addIdea(array $idea): void
 {
     try {
