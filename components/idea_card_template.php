@@ -9,7 +9,7 @@
         </p>
 
         <div class="idea-voting">
-            <p><span class="vote-count" aria-live="polite" aria-atomic="true"><?= (int)($result['vote_approve'] ?? 0); ?></span> votes</p>
+            <p><span class="vote-count" aria-live="polite" aria-atomic="true"><?= (int)($result['vote'] ?? 0); ?></span> votes</p>
             <button type="button" class="vote-button">+1</button>
         </div>
 

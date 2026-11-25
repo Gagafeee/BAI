@@ -1,5 +1,5 @@
 
-INSERT INTO ideas (pseudo, title, description, vote_approve)
+INSERT INTO ideas (pseudo, title, description, vote)
 VALUES
 (
     'Thomas42',

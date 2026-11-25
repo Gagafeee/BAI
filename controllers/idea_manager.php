@@ -17,7 +17,7 @@ function add_approve_vote(int $idea_id): void
     try {
         $pdo = getPDO();
 
-        $query = $pdo->prepare("UPDATE ideas SET vote_approve = vote_approve + 1 WHERE id = :idea_id");
+        $query = $pdo->prepare("UPDATE ideas SET vote = vote + 1 WHERE id = :idea_id");
         $query->execute(["idea_id" => $idea_id]);
         if ($query->rowCount() === 0) throw new Exception("Nous n'avons pas pu modifier cette idée.");
     } catch (PDOException $error) {
