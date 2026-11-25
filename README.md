@@ -75,4 +75,8 @@ Des exemples de requêtes sont disponibles dans `tests_requests.http`.
 
 ## État actuel
 
+Le fichier idea.manager.php est celui qui se trouve chargé d'accepter, refuser ou ajouter une suggestion,il vérifie si l'idée proposée a été accepté car si le champ est vide ou est composé que d'espaces ou si la proposition est très longue, l'idée serait automatiquement refusé et un message d'erreur serait affiché.
+Donc dans les cas où une erreur se présente, vous n'avez pas respecté les conditions.
+
 L’application est un projet en développement.
+
