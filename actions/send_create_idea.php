@@ -28,5 +28,5 @@ try {
     addIdea($data);
     set_redirect_successful("", "Nous avons bien ajouté votre idée.");
 } catch (Exception $e) {
-    echo $e;
+    echo htmlspecialchars($e);
 }

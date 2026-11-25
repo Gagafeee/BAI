@@ -12,6 +12,60 @@
 |-----------|-----------------|----------------------|-----------------------------|-------|
 |           |                 |                      |                             |       |
 
+## User story 7 - Protection XSS - Relecture IA
+
+> Gabriel - 25/11/2026 11h
+
+Je viens d'effectuer un test xss en ajoutant une idée avec un contenu :
+
+```html
+<script>alert('XSS')</script> 
+```
+
+J'ai corrigé la faille en ajoutant `htmlspecialchars()` sur chaque champ affiché sur les cartes d'idées.
+
+### Je vais faire relire le code par l'IA pour identifier de potentiels endroits où la vulnérabilité est encore présente :
+
+J'utilise `Junie Lite + reflexion` avec `AIR` + les intégrations de l'IDE.
+
+Prompt :
+> Je suis en train de protéger mon site contre les failles de sécurité basique tel que l'injection XSS. Je viens d'ajouter la fonction php `htmlspecialchars` autour des elements affiché depuis la base
+> de donnée.
+>
+> Aide-moi à identifier les endroits potentiels où une telle faille existe toujours.
+>
+> Je précise que le site ne possède pas de système d'authentification et ne prévoit pas d'en ajouter pour le moment, il est donc possible d'ajouter des votes à l'infini, c'est le comportement
+> souhaité.
+>
+Le modèle est en mode `plannification`, il a la possibilité de créer des agents, d'exécuter des commandes avec un système de sécurité et a accès à l'ensemble du projet sauf les données sensibles via
+un fichier `.aiignore`, il ne peut pas modifier les fichiers du projet.
+
+### Réponse :
+
+> Aucun XSS directement exploitable n’a été confirmé dans le rendu normal des idées. Un point de sortie PHP reste à durcir, et la sécurité des notifications dépend de la bibliothèque externe.
+> 
+
+<table>
+<tr>
+    <th>N°</th>
+    <th>Remarque de l'IA</th>
+    <th>Ce que j'ai vérifié</th>
+    <th>Décision</th>
+    <th>Pourquoi</th>
+    <th>Commit</th>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Possible vulnérabilité dans les messages d'erreurs dans send_create_idea.php</td>
+    <td>Le code en question, l'IA fait remarqué qu'une faille pourrait un jour apparaître si un des messages d'erreurs contient une donnée dynamique.</td>
+    <td>Accepté</td>
+    <td>C'est une bonne remarque pour éviter une faille future, j'ajoute htmlspecialchars.</td>
+    <td></td>
+</tr>
+</table>
+
+---
+
 ## User story 9 - Système de vote - Relecture IA
 
 > Gabriel - 24/11/2026 11h
@@ -232,6 +286,8 @@ Je refais des tests par moi-même :
 - Peut-on toujours ajouter une nouvelle idée.
 - Peut-on toujours voter pour une idée.
 - Les cas d'erreurs ont été testés au moment d'appliquer la correction.
+
+---
 
 ## User story 10 - Dynamisation du système de vote - Full IA
 
