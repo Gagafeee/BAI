@@ -42,6 +42,7 @@ require 'components/card_functions.php';
         <?php addIdea(); ?>
     </div>
 </div>
+<script src="scripts/notifications.js" defer></script>
 <script src="scripts/action-manager.js" defer></script>
 <script src="scripts/vote.js" defer></script>
 </body>
